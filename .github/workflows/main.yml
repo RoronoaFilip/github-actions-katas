@@ -28,3 +28,20 @@ jobs:
         with:
           name: code
           path: .
+
+  lint:
+    runs-on: ubuntu-latest
+    needs: [build]
+
+    steps:
+      - name: Download code
+        uses: actions/download-artifact@v4
+        with:
+          name: code
+          path: .
+    
+      - name: Run linting
+        uses: super-linter/super-linter/slim@v5
+        env:
+          DEFAULT_BRANCH: main
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
