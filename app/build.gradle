@@ -1,10 +1,9 @@
 plugins {
+    id "application"
+    id "org.sonarqube" version "5.1.0.4882"
     id "net.ltgt.apt-eclipse" version "0.21"
     id "com.github.johnrengelman.shadow" version "5.0.0"
-    id "application"
 }
-
-
 
 version "0.1"
 group "example.micronaut"
@@ -16,7 +15,7 @@ repositories {
 
 configurations {
     // for dependencies that are needed for development only
-    developmentOnly 
+    developmentOnly
 }
 
 dependencies {
@@ -57,3 +56,11 @@ shadowJar {
 
 run.classpath += configurations.developmentOnly
 run.jvmArgs('-noverify', '-XX:TieredStopAtLevel=1', '-Dcom.sun.management.jmxremote')
+
+sonar {
+    properties {
+        property "sonar.projectKey", "RoronoaFilip_github-actions-katas"
+        property "sonar.organization", "roronoafilip"
+        property "sonar.host.url", "https://sonarcloud.io"
+    }
+}
